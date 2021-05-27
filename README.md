@@ -12,11 +12,11 @@ ___
 - rasack or line-bot-api
 ___
 ## 実行手順
-% git clone git@github.com:Hiryo/prototype_app.git
-% cd prototype_app
-% bundle install
-% rails db:create db:migrate
-% rails s
+% git clone git@github.com:Hiryo/prototype_app.git  
+% cd prototype_app  
+% bundle install  
+% rails db:create db:migrate  
+% rails s  
 ___
 ## カタログ設計
 https://docs.google.com/spreadsheets/d/14-ToORPjrmmufEX8T0N3YN_f1eJ7N3q8vw577GKgYSc/edit?usp=sharing
