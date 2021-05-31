@@ -9,7 +9,7 @@ ___
 - AWS
 ___
 ## カリキュラム外の技術
-- rasack or line-bot-api
+- ransack
 ___
 ## 実行手順
 % git clone git@github.com:Hiryo/prototype_app.git  
@@ -26,3 +26,6 @@ https://docs.google.com/spreadsheets/d/13RQXnzHiPdJmBedsiUPnru5xWqEi1GVO_ywaCzbM
 ___
 ## ワイヤーフレーム
 https://cacoo.com/diagrams/xOYvHGnv9pVF8C4L/5F823
+___
+## 画面遷移図
+<img src="./app/assets/images/diagram.png" alt="画面遷移図" width='650px'>
