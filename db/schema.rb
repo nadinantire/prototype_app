@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_050900) do
+ActiveRecord::Schema.define(version: 2021_06_03_051913) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,6 +24,16 @@ ActiveRecord::Schema.define(version: 2021_06_03_050900) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["order_id"], name: "index_accessories_on_order_id"
+  end
+
+  create_table "attachements", force: :cascade do |t|
+    t.binary "file"
+    t.string "image"
+    t.string "title"
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_attachements_on_order_id"
   end
 
   create_table "items", force: :cascade do |t|
@@ -69,6 +79,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_050900) do
   end
 
   add_foreign_key "accessories", "orders"
+  add_foreign_key "attachements", "orders"
   add_foreign_key "items", "orders"
   add_foreign_key "order_overviews", "orders"
   add_foreign_key "orders", "users"
