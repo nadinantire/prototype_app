@@ -1,11 +1,11 @@
 class CreateAccessories < ActiveRecord::Migration[5.2]
   def change
     create_table :accessories do |t|
-      t.string :equipment
-      t.string :name
+      t.string :equipment, null: false
+      t.string :name, null: false
       t.string :numeral
       t.string :identification
-      t.order :references
+      t.references :order, foreign_key: true
 
       t.timestamps
     end
