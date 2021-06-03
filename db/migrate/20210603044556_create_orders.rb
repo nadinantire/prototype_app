@@ -1,12 +1,12 @@
 class CreateOrders < ActiveRecord::Migration[5.2]
   def change
     create_table :orders do |t|
-      t.integer :quantity
+      t.integer :quantity, null: false
       t.text :remaks
-      t.integer :delivery
-      t.date :acceptance_on
-      t.boolean :quotation
-      t.boolean :carry
+      t.integer :delivery, null: false
+      t.date :acceptance_on, null: false
+      t.boolean :quotation, null: false, default: false
+      t.boolean :carry, null: false, default: true
       t.references :user, foreign_key: true
 
       t.timestamps

@@ -10,10 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_042253) do
+ActiveRecord::Schema.define(version: 2021_06_03_044556) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "orders", force: :cascade do |t|
+    t.integer "quantity", null: false
+    t.text "remaks"
+    t.integer "delivery", null: false
+    t.date "acceptance_on", null: false
+    t.boolean "quotation", default: false, null: false
+    t.boolean "carry", default: true, null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_orders_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "email", null: false
@@ -23,4 +36,5 @@ ActiveRecord::Schema.define(version: 2021_06_03_042253) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "orders", "users"
 end
