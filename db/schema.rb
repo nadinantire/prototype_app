@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_03_050218) do
+ActiveRecord::Schema.define(version: 2021_06_03_050900) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +36,17 @@ ActiveRecord::Schema.define(version: 2021_06_03_050218) do
     t.index ["order_id"], name: "index_items_on_order_id"
   end
 
+  create_table "order_overviews", force: :cascade do |t|
+    t.string "company", null: false
+    t.string "department", null: false
+    t.string "position"
+    t.string "name", null: false
+    t.bigint "order_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["order_id"], name: "index_order_overviews_on_order_id"
+  end
+
   create_table "orders", force: :cascade do |t|
     t.integer "quantity", null: false
     t.text "remaks"
@@ -59,5 +70,6 @@ ActiveRecord::Schema.define(version: 2021_06_03_050218) do
 
   add_foreign_key "accessories", "orders"
   add_foreign_key "items", "orders"
+  add_foreign_key "order_overviews", "orders"
   add_foreign_key "orders", "users"
 end
