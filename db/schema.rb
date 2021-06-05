@@ -59,7 +59,7 @@ ActiveRecord::Schema.define(version: 2021_06_03_051913) do
 
   create_table "orders", force: :cascade do |t|
     t.integer "quantity", null: false
-    t.text "remaks"
+    t.text "remarks"
     t.integer "delivery", null: false
     t.date "acceptance_on", null: false
     t.boolean "quotation", default: false, null: false
