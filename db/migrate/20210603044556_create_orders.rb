@@ -2,7 +2,7 @@ class CreateOrders < ActiveRecord::Migration[5.2]
   def change
     create_table :orders do |t|
       t.integer :quantity, null: false
-      t.text :remaks
+      t.text :remarks
       t.integer :delivery, null: false
       t.date :acceptance_on, null: false
       t.boolean :quotation, null: false, default: false
