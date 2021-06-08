@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'users/index'
   root to: 'orders#index'
   resources :orders
   resources :accessories
