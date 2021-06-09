@@ -12,6 +12,9 @@ class OrderForm
   end
 
   attr_accessor :quantity, :remarks, :delivery, :acceptance_on
+  validates :quantity, presence: true
+  validates :delivery, presence: true
+  validates :acceptance_on, presence: true
 
   concerning :AccessoryBuilder do
 	attr_reader :accessories_attributes
@@ -25,10 +28,29 @@ class OrderForm
 	end
   end
 
-  attr_accessor :equipment, :name, :numeral, :identification
+  attr_accessor :equipment, :parts, :numeral, :identification
+  validates :equipment, presence: true
+  validates :parts, presence: true
+
+  concerning :OrderOverviewsBuilder do
+	attr_reader :order_overviews_attributes
+
+	def order_overviews
+	  @order_overviews_attributes ||= OrderOverview.new
+	end
+
+	def order_overviews_attributes=(attributes)
+	  @order_overviews_attributes = OrderOverview.new(attributes)
+	end
+  end
+
+  attr_accessor :company, :department, :position, :name
+  validates :company, presence: true
+  validates :department, presence: true
+  validates :name, presence: true
 
   def save
-	# return false if invalid?
+	return false if invalid?
 
 	order.assign_attributes(order_params)
 	build_associations
@@ -43,7 +65,8 @@ class OrderForm
   end
 
   def build_associations
-	order.accessories.build(equipment: equipment, name: name, numeral: numeral, identification: identification).save
+	order.accessories.build(equipment: equipment, parts: parts, numeral: numeral, identification: identification).save
+	order.order_overviews.build(company: company, department: department, position: position, name: name).save
   end
 end
 
