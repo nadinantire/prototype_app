@@ -1,0 +1,33 @@
+<div class="wrapper">
+      <%= link_to '登録する', new_order_path %>
+    <div class="orderormats">
+  <table>
+    <thead>
+      <tr>
+        <th>日付</th>
+        <th>部品名</th>
+        <th>型番</th>
+        <th>型式</th>
+        <th>機器名</th>
+        <th>数量</th>
+        <th>納期</th>
+        <th>備考</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        <% @orders.each do |order| %>
+        <tr>
+          <td><%= order.acceptance_on %></td>
+          <td><%= order.quantity %></td>
+          <td><%= order.delivery %>/</td>
+          <td><%= order.remarks %></td>
+          <% order.accessories.each do |order| %>
+            
+            <td><%= order.equipment %></td>
+            <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,41 @@
+<%= form_with(model: @order_form, local: true, url: orders_path ) do |f| %>
+<tr>
+  <td><%= f.label :"日付" %>
+      <%= f.date_field :acceptance_on %>
+  </td>
+  <%#= f.fields_for :accessories do |i| %>
+
+  <td>
+    <%= f.label :"部品名" %>
+    <%= f.text_field :name %>
+  </td>
+  <td>
+    <%= f.label :"機器名" %>
+    <%= f.text_field :equipment %>
+  </td>
+  <td>
+    <%= f.label :"型番" %>
+    <%= f.text_field :numeral %>
+  </td>
+  <td>
+    <%= f.label :"型式" %>
+    <%= f.text_field :identification %>
+  </td>
+  <%# end %>
+  <td>
+    <%= f.label :"数量" %>
+    <%= f.text_field :quantity %>
+  </td>
+  <td>
+    <%= f.label :"備考" %>
+    <%= f.text_field :remarks %>
+  </td>
+  <td>
+    <%= f.label :"納期" %>
+    <%= f.text_field :delivery %>
+  </td>
+</tr>
+    <%= f.submit %>
+  <% end %>
+
+<%= link_to "一覧画面", orders_path %>

@@ -1,0 +1,19 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  quantity: 1
+  remaks: MyText
+  delivery: 1
+  acceptance_on: 2021-06-03
+  quotation: false
+  carry: false
+  user: one
+
+two:
+  quantity: 1
+  remaks: MyText
+  delivery: 1
+  acceptance_on: 2021-06-03
+  quotation: false
+  carry: false
+  user: two
