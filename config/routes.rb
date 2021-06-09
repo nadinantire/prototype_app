@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   devise_for :users
   root to: 'users#index'
+  post '/users/guest_sign_in', to: 'users#guest_sign_in'
 
   resources :orders
   resources :accessories
