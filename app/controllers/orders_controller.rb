@@ -1,16 +1,14 @@
 class OrdersController < ApplicationController
-  # before_action :set_order, only: [:index, :show, :edit, :update, :destroy]
+  # before_action :set_order, only: [:show, :edit, :update, :destroy]
   def index
-    @orders = Order.includes(:accessories)
+    @orders = Order.includes(:accessories, :order_overviews)
   end
 
   def new
     @order = OrderForm.new
-    # @order.build_accessories
   end
 
   def create
-    # binding.irb
     @order = OrderForm.new(order_params)
     if @order.save
       redirect_to root_path
@@ -20,6 +18,8 @@ class OrdersController < ApplicationController
   end
 
   def show
+    @orders = Order.where(id: params[:id])
+
   end
 
   def edit
@@ -47,7 +47,7 @@ class OrdersController < ApplicationController
 
   private
   def order_params
-    params.permit(:quantity, :remarks, :delivery, :acceptance_on, :equipment, :name, :numeral, :identification)
+    params.permit(:quantity, :remarks, :delivery, :acceptance_on, :equipment, :parts, :numeral, :identification, :company, :department, :position, :name)
   end
 end
 
