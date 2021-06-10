@@ -4,8 +4,8 @@
   <td><%= f.label :"日付" %>
       <%= f.date_field :acceptance_on %>
   </td>
+  
   <%= f.fields_for :accessories do |i| %>
-
   <td>
     <%= i.label :"部品名" %>
     <%= i.text_field :parts %>
@@ -22,8 +22,8 @@
     <%= i.label :"機器名" %>
     <%= i.text_field :equipment %>
   </td>
-
   <% end %>
+  
   <td>
     <%= f.label :"数量" %>
     <%= f.number_field :quantity %>
@@ -35,9 +35,9 @@
   <td>
     <%= f.label :"備考" %>
     <%= f.text_field :remarks %>
-
-    <%= f.fields_for :order_overviews do |o| %>
-  </td>
+　　 </td>
+  
+  <%= f.fields_for :order_overviews do |o| %>
   <td><%= o.label :"会社名" %>
     <%= o.text_field :company %>
   </td>
@@ -54,7 +54,6 @@
 </tr>
 </table>
     <%= f.submit %>
-    
   <% end %>
 
 <%= link_to "一覧画面", orders_path %>
