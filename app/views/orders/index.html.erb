@@ -1,6 +1,5 @@
 <div class="wrapper">
-      <%= link_to '登録する', new_order_path %>
-    <div class="orderormats">
+    <div class="order_formats">
   <table>
     <thead>
       <tr>
@@ -19,15 +18,28 @@
         <% @orders.each do |order| %>
         <tr>
           <td><%= order.acceptance_on %></td>
-          <td><%= order.quantity %></td>
+          <% order.accessories.each do |accessory| %>
+            <td><%= accessory.parts %></td>
+            <td><%= accessory.numeral %></td>
+            <td><%= accessory.identification %></td>
+            <td><%= accessory.equipment %></td>
+          <% end %>
+          <td><%= order.quantity %>/</td>
           <td><%= order.delivery %>/</td>
           <td><%= order.remarks %></td>
-          <% order.accessories.each do |order| %>
-            
-            <td><%= order.equipment %></td>
-            <% end %>
+          <% order.order_overviews.each do |overview| %>
+            <td><%= overview.company %></td>
+            <td><%= overview.department %></td>
+            <td><%= overview.position %></td>
+            <td><%= overview.name %></td>
+          <% end %>
         </tr>
+        <%= link_to '保存', order_path(order.id) %>
+        <%= link_to '編集', edit_order_path(order.id) %>
+        <%= link_to '削除', order, method: :delete, data: { confirm: '削除しますか?' } %>
+
       <% end %>
     </tbody>
   </table>
 </div>
+<%= link_to '新規作成', new_order_path %>

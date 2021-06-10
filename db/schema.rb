@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2021_06_09_025423) do
 
   create_table "accessories", force: :cascade do |t|
     t.string "equipment", null: false
-    t.string "name", null: false
+    t.string "parts", null: false
     t.string "numeral"
     t.string "identification"
     t.bigint "order_id"
