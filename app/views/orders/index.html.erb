@@ -35,6 +35,8 @@
           <% end %>
         </tr>
         <%= link_to '保存', order_path(order.id) %>
+        <%= link_to '編集', edit_order_path(order.id) %>
+        <%= link_to '削除', order, method: :delete, data: { confirm: '削除しますか?' } %>
 
       <% end %>
     </tbody>
