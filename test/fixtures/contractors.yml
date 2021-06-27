@@ -1,0 +1,21 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  price: 1
+  tax: 1
+  discount: 1
+  total: 1
+  due_on: 2021-06-14
+  acceptance_on: 2021-06-14
+  overview: one
+  order: one
+
+two:
+  price: 1
+  tax: 1
+  discount: 1
+  total: 1
+  due_on: 2021-06-14
+  acceptance_on: 2021-06-14
+  overview: two
+  order: two

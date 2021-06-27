@@ -5,11 +5,11 @@ one:
   department: MyString
   position: MyString
   name: MyString
-  order: one
+  user: one
 
 two:
   company: MyString
   department: MyString
   position: MyString
   name: MyString
-  order: two
+  user: two
