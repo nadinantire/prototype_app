@@ -1,0 +1,75 @@
+<h1 id="typography">備品受注表</h1>
+<div class="search">
+  <%= search_form_for [@purchase, @search] do |f| %>
+    <%= f.search_field :purchase_orders_parts_or_purchase_orders_equipment_or_purchase_orders_numeral_or_purchase_orders_identification_cont, class: "search-form", placeholder: "キーワード検索" %>
+    <%= f.submit "検索", class: "search-btn" %>
+  <% end %>
+</div>
+
+<div class="container">
+<!-- Buttons================================================== -->
+<div class="btn">
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary">作成</button>
+      <div class="btn-group" role="group">
+        <button id="btnGroupDrop3" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+        <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+          <% if current_user.admin == '管理者' %>
+            <a class="dropdown-item" href="#"><%= link_to "管理画面", admin_users_path %></a>
+          <% end %>
+          <a class="dropdown-item" href="#"><%= link_to "新規作成", new_purchase_order_confirmation_path %></a>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- Tables================================================== -->
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="bs-component">
+        <div class="wrapper">
+          <div class="purchase_formats">
+            <table class="table table-hover">
+              <thead>
+                <tr class="success">
+                  <th>日付</th>
+                  <th>タイトル</th>
+                </tr>
+              </thead>
+            </table>
+            <table class="table table-hover">
+              <tbody>
+                <div class = "box11" >
+                  <tr>
+                  <% @order_confirmations.each do |order|%>
+                    <th><%= order.acceptance_on %></th>
+                    <% if order.title.length >= 25 %>
+                      <% text = order.title %>
+                      <% text = text.slice(0..25) %>
+                      <% text += "..." %>
+                      <%= link_to (text), purchase_order_confirmation_path(@purchase, order_confirmation.id) %>
+                    <% else %>
+                      <th><%= link_to (order.title), purchase_order_confirmation_path(@purchase, @order_confirmations.ids) %></th>
+                    <% end %>
+                  <% end %>
+                </tr>
+                </div>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<%= paginate @order_confirmations %>
+
+<footer>
+  <div id="footer" class="fixed-bottom" style="height:50px; background-color: #343a40; color: #fff;">
+    <p class="text-center">© 2021 Hill inc.</p>
+  </div>
+</footer>

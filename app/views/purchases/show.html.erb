@@ -1,0 +1,65 @@
+<%= flash[:notice] %>
+<h1 id="typography">備品発注表</h1>
+<%= link_to '発注一覧', purchases_path %>
+<%= link_to '受注一覧', purchase_order_confirmations_path(@purchase) %>
+<% if current_user.admin == '管理者' %>
+  <%= link_to '管理画面', admin_user_path %>
+<% end %>
+
+<div><%= @purchase.acceptance_on %></div>
+<div>納入希望日  <%= @purchase.delivery %></div>
+
+<div class="wrapper">
+  <div class="purchase_formats">
+    <section>
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="bs-component">
+            <div class="wrapper">
+              <div class="purchase_formats">
+                <table class="table table-hover">
+                  <thead>
+                    <div><%= @purchase.firm %></div>
+                    <div><%= @purchase.department %></div>
+                    <div><%= @purchase.position %></div>
+                    <div><%= @purchase.name %></div>
+                  </thead>
+                </table>
+                <div class="label">
+                <table class="table table-hover">
+                  <tbody>
+                    <tr>
+                      <th>部品名</th>
+                      <th>機器名</th>
+                      <th>型番</th>
+                      <th>型式</th>
+                      <th>数量</th>
+                      <th>備考</th>
+                    </tr>
+                    <% @orders.each do |order| %>
+                      <tr>
+                        <td><%= order.parts %></td>
+                        <td><%= order.equipment %></td>
+                        <td><%= order.numeral %></td>
+                        <td><%= order.identification %></td>
+                        <td><%= order.quantity %></td>
+                        <td><%= order.remarks %></td>
+                      </tr>
+                    <% end %>
+                  </tbody>
+                </table>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+<% if current_user.admin == '管理者' %>
+  <%= link_to '編集', edit_purchase_path(@purchase) %>
+  <%= link_to '削除', purchase_path(@purchase), method: :delete, data: { confirm: '削除しますか?' } %>
+  <%= link_to "受注", new_purchase_order_confirmation_path(@purchase) %>
+<% end %>
+

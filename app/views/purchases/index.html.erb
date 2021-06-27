@@ -1,0 +1,77 @@
+<div class="container">
+<h1 id="typography">備品発注表</h1>
+  <%= search_form_for @search do |f| %>
+    <%= f.search_field :orders_parts_or_orders_equipment_or_orders_numeral_or_orders_identification_cont, class: "search-form", placeholder: "キーワード検索" %>
+    <%= f.submit "検索", class: "search-btn" %>
+  <% end %>
+
+<!-- Buttons================================================== -->
+<div class="btn">
+  <div class="btn-group" role="group" aria-label="Button group with nested dropdown">
+    <button type="button" class="btn btn-secondary">作成</button>
+    <div class="btn-group" role="group">
+      <button id="btnGroupDrop3" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></button>
+      <div class="dropdown-menu" aria-labelledby="btnGroupDrop3">
+        <% if user_signed_in? && current_user == current_user.admin %>
+          <a class="dropdown-item" href="#"><%= link_to "管理画面", admin_users_path %></a>
+        <% end %>
+        <a class="dropdown-item" href="#"><%= link_to "新規作成", new_purchase_path(@purchase) %></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Tables================================================== -->
+<section>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="bs-component">
+        <div class="wrapper">
+          <div class="purchase_formats">
+            <table class="table table-hover">
+              <thead>
+                <tr class="success">
+                  <th>日付</th>
+                  <th>タイトル</th>
+                </tr>
+              </thead>
+            </table>
+            <table class="table table-hover">
+              <tbody>
+                <tr>
+                  <div class = "box11" >
+                    <tr>
+                    <% @purchases.each do |purchase|%>
+                      <th><%= purchase.acceptance_on %></th>
+                      <% if purchase.title.length >= 25 %>
+                        <% text = purchase.title %>
+                        <% text = text.slice(0..25) %>
+                        <% text += "..." %>
+                        <%= link_to (text), purchase_path(purchase.id) %>
+                      <% else %>
+                        <th><%= link_to (purchase.title), purchase_path(purchase.id) %></th>
+                      <% end %>
+                    <% end %>
+                  </tr>
+                  </div>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</div>
+<% if user_signed_in? && current_user == current_user.admin %>
+  <%= link_to '編集', edit_purchase_path(@purchase) %>
+  <%= link_to '削除', purchase_path(@purchase), method: :delete, data: { confirm: '削除しますか?' } %>
+<% end %>
+<%= paginate @purchases %>
+
+<footer>
+  <div id="footer" class="fixed-bottom" style="height:50px; background-color: #343a40; color: #fff;">
+    <p class="text-center">© 2021 Hill inc.</p>
+  </div>
+</footer>

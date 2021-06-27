@@ -1,42 +1,5 @@
-<div class="wrapper">
-    <div class="order_formats">
-  <table>
-    <thead>
-      <tr>
-        <th>日付</th>
-        <th>部品名</th>
-        <th>型番</th>
-        <th>型式</th>
-        <th>機器名</th>
-        <th>数量</th>
-        <th>納期</th>
-        <th>備考</th>
-      </tr>
-    </thead>
+<h1>ユーザー詳細</h1>
+<p>id: <%= @user.id %></p>
+<p>メールアドレス: <%= @user.email %></p>
 
-    <tbody>
-        <% @orders.each do |order| %>
-        <tr>
-          <td><%= order.acceptance_on %></td>
-          <% order.accessories.each do |accessory| %>
-            <td><%= accessory.parts %></td>
-            <td><%= accessory.numeral %></td>
-            <td><%= accessory.identification %></td>
-            <td><%= accessory.equipment %></td>
-          <% end %>
-          <td><%= order.quantity %>/</td>
-          <td><%= order.delivery %>/</td>
-          <td><%= order.remarks %></td>
-          <% order.order_overviews.each do |overview| %>
-            <td><%= overview.company %></td>
-            <td><%= overview.department %></td>
-            <td><%= overview.position %></td>
-            <td><%= overview.name %></td>
-          <% end %>
-        </tr>
-
-      <% end %>
-    </tbody>
-  </table>
-</div>
-<%= link_to '一覧画面', orders_path %>
+<%= link_to "ユーザー一覧に戻る", admin_users_path %>
