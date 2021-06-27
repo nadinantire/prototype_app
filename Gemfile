@@ -17,6 +17,8 @@ gem 'dotenv-rails'
 gem 'unicorn'
 gem 'mini_racer', platforms: :ruby
 
+gem 'ed25519', '>= 1.2', '< 2.0'
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 
 gem 'bootsnap', '>= 1.1.0', require: false
 
@@ -27,6 +29,11 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'faker'
   gem 'launchy'
+  gem 'capistrano', '3.6.0' # capistranoのツール一式
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
 end
 
 group :development do
