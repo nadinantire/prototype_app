@@ -10,64 +10,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_09_025423) do
+ActiveRecord::Schema.define(version: 2021_06_16_003242) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "accessories", force: :cascade do |t|
-    t.string "equipment", null: false
-    t.string "parts", null: false
-    t.string "numeral"
-    t.string "identification"
-    t.bigint "order_id"
+  create_table "contractors", force: :cascade do |t|
+    t.integer "price", null: false
+    t.integer "tax", null: false
+    t.integer "total", null: false
+    t.date "due_on", null: false
+    t.bigint "order_confirmation_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_accessories_on_order_id"
+    t.index ["order_confirmation_id"], name: "index_contractors_on_order_confirmation_id"
   end
 
-  create_table "attachements", force: :cascade do |t|
-    t.binary "file"
-    t.string "image"
-    t.string "title"
-    t.bigint "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_attachements_on_order_id"
-  end
-
-  create_table "items", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "numeral"
-    t.string "identification"
-    t.bigint "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_items_on_order_id"
-  end
-
-  create_table "order_overviews", force: :cascade do |t|
-    t.string "company", null: false
+  create_table "order_confirmations", force: :cascade do |t|
+    t.string "firm", null: false
     t.string "department", null: false
     t.string "position"
     t.string "name", null: false
-    t.bigint "order_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["order_id"], name: "index_order_overviews_on_order_id"
-  end
-
-  create_table "orders", force: :cascade do |t|
-    t.integer "quantity", null: false
-    t.text "remarks"
-    t.integer "delivery", null: false
-    t.date "acceptance_on", null: false
-    t.boolean "quotation", default: false, null: false
-    t.boolean "carry", default: true, null: false
     t.bigint "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.string "title", null: false
+    t.bigint "purchase_id"
+    t.date "acceptance_on"
+    t.index ["purchase_id"], name: "index_order_confirmations_on_purchase_id"
+    t.index ["user_id"], name: "index_order_confirmations_on_user_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "parts", null: false
+    t.string "equipment", null: false
+    t.string "numeral"
+    t.string "identification"
+    t.string "quantity", null: false
+    t.text "remarks"
+    t.bigint "purchase_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchase_id"], name: "index_orders_on_purchase_id"
+  end
+
+  create_table "purchases", force: :cascade do |t|
+    t.string "firm", null: false
+    t.string "department", null: false
+    t.string "position"
+    t.string "name", null: false
+    t.date "acceptance_on", null: false
+    t.string "delivery", null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "title"
+    t.index ["user_id"], name: "index_purchases_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -83,9 +81,9 @@ ActiveRecord::Schema.define(version: 2021_06_09_025423) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "accessories", "orders"
-  add_foreign_key "attachements", "orders"
-  add_foreign_key "items", "orders"
-  add_foreign_key "order_overviews", "orders"
-  add_foreign_key "orders", "users"
+  add_foreign_key "contractors", "order_confirmations"
+  add_foreign_key "order_confirmations", "purchases"
+  add_foreign_key "order_confirmations", "users"
+  add_foreign_key "orders", "purchases"
+  add_foreign_key "purchases", "users"
 end
