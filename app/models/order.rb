@@ -1,16 +1,9 @@
 class Order < ApplicationRecord
-  belongs_to :user
-  has_many :accessories, dependent: :destroy
-  has_many :items, dependent: :destroy
-  has_many :order_overviews, dependent: :destroy
-  has_many :attachements, dependent: :destroy
-
-  accepts_nested_attributes_for :accessories, :order_overviews, reject_if: :all_blank, allow_destroy: true
+  belongs_to :purchase
 
   with_options presence: true do
+    validates :parts
+    validates :equipment
     validates :quantity
-    validates :delivery
-    validates :remarks
-    validates :acceptance_on
   end
 end
