@@ -1,20 +1,15 @@
 # config valid only for current version of Capistrano
-lock '3.6.0'
-
-set :application, 'proto_type_app'
-set :repo_url, 'git@example.com:me/my_repo.git'
-
-lock '3.6.0'
-set :application, 'proto_type_app'
+lock '3.16.0'
+set :application, 'prototype_app'
 set :repo_url, 'https://github.com/Hiryo/prototype_app.git'
 set :branch, ENV['BRANCH'] || 'master'
-set :deploy_to, '/var/www/achieve'
+set :deploy_to, '/var/www/prototype_app'
 set :linked_files, %w{.env config/secrets.yml}
 set :linked_dirs, %w{log tmp/pids tmp/cache tmp/sockets public/uploads}
 set :keep_releases, 5
 set :rbenv_ruby, '2.6.5'
 set :rbenv_type, :system
-set :log_level, :info
+set :log_level, :debug
 
 namespace :deploy do
   desc 'Restart application'
