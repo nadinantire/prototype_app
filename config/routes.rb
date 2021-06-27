@@ -3,6 +3,10 @@ Rails.application.routes.draw do
   root to: 'users#index'
   post '/users/guest_sign_in', to: 'users#guest_sign_in'
 
+  namespace :admin do
+    resources :users, only: [:index, :show, :edit, :destroy]
+  end
+
   resources :orders
   resources :accessories
   resources :items

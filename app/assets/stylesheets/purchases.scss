@@ -1,0 +1,55 @@
+// Place all the styles related to the companies controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.label {
+  text-align: center;
+}
+
+.container-fluid {
+  text-align: center;
+}
+
+.table_field {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  margin: 0 auto;
+  display: flex;
+  width: 90%;
+}
+
+.bs-component + .bs-component {
+  margin-top: 1rem;
+}
+@media (min-width: 768px) {
+  .bs-docs-section {
+    margin-top: 8em;
+  }
+  .bs-component {
+    position: relative;
+  }
+  .bs-component .modal {
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    z-index: 1;
+    display: block;
+  }
+  .bs-component .modal-dialog {
+    width: 90%;
+  }
+  .bs-component .popover {
+    position: relative;
+    display: inline-block;
+    width: 220px;
+    margin: 20px;
+  }
+  .nav-tabs {
+    margin-bottom: 15px;
+  }
+  .progress {
+    margin-bottom: 10px;
+  }
+}

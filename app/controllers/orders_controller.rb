@@ -11,9 +11,9 @@ class OrdersController < ApplicationController
   end
 
   def create
-    @order = Order.new(order_params)
+    @order = current_user.orders.build(order_params)
     if @order.save
-      redirect_to root_path
+      redirect_to order_path(@order.id)
     else
       render 'new'
     end
