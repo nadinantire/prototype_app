@@ -1,19 +1,62 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>ProtoTypeApp</title>
+    <title>ProtoType</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <meta name="viewport" content="width=devise-width,initial-scale=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
   <body>
-    <%= render 'layouts/header' %>
-    <div class="container-fluid py-4 mw-md">
-      <%= yield %>
-    </div>
+    <!-- Navbar================================================== -->
+    <header>
+        <section>
+          <div class="row">
+            <div class="col-lg-12">
+              <div class="page-header">
+              </div>
+              <div class="bs-component">
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                  <a class="navbar-brand" href="#"><%= link_to "Prototype_app", tops_index_path, class: 'navbar-brand' %></a>
+                  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                  </button>
+                  <div class="collapse navbar-collapse" id="navbarColor02">
+                    <ul class="navbar-nav mr-auto">
+                      <li class="nav-item active">
+                        <% if user_signed_in? %>
+                          <li class="nav-item">
+                            <%= link_to 'アカウント', edit_user_registration_path, class: 'nav-link' %>
+                          </li>
+                          <li class="nav-item">
+                            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class: 'nav-link' %>
+                          </li>
+                        <% else %>
+                          <li class="nav-item">
+                            <%= link_to "新規登録", new_user_registration_path, class: 'nav-link' %>
+                          </li>
+                          <li class="nav-item">
+                            <%= link_to "ログイン", new_user_session_path, class: 'nav-link' %>
+                          </li>
+                          <li class="nav-item">
+                            <%= link_to "ゲストログイン(閲覧用)", users_guest_sign_in_path, method: :post, class: 'nav-link' %>
+                          </li>
+                          <li class="nav-item">
+                            <%= link_to 'ゲストアドミン（閲覧用）', users_admin_guest_sign_in_path, method: :post, class: 'nav-link' %>
+                          </li>
+                        <% end %>
+                      </li>
+                    </ul>
+                  </div>
+                </nav>
+              </div>
+            </div>
+          </div>
+        </section>
+      </header>
+    <%= yield %>
   </body>
 </html>

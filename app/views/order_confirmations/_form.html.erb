@@ -1,0 +1,71 @@
+<%= form_with(model: [@purchase, @order_confirmation], local: true ) do |f| %>
+  <% if @order_confirmation.errors.any? %>
+    <div id ="error_explanation">
+      <h2><%= @order_confirmation.errors.count %>件のエラーあります。</h2>
+      <ul>
+        <% @order_confirmation.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+    <% end %>
+  <table>
+    <tr>
+      <td>
+        <%= f.label :"日付" %>
+        <%= f.date_field :acceptance_on %>
+      </td>
+      <td>
+        <%= f.label :"会社名" %>
+        <%= f.text_field :firm %>
+      </td>
+      <td>
+        <%= f.label :"所属部署" %>
+        <%= f.text_field :department %>
+      </td>
+      <td>
+        <%= f.label :"役職" %>
+        <%= f.text_field :position %>
+      </td>
+      <td>
+        <%= f.label :"受注者" %>
+        <%= f.text_field :name %>
+      </td>
+      <td>
+        <%= f.label :"タイトル" %>
+        <%= f.text_field :title %>
+      </td>
+      <%= f.hidden_field :purchase_id, value: @purchase.id %>
+    </tr>
+    <%= f.nested_fields_for :contractors, wrapper_tag: :tr do |i| %>
+      <td>
+        <%= i.label :"価格" %>
+        <%= i.number_field :price %>
+      </td>
+      <td>
+        <%= i.label :"税" %>
+        <%= i.number_field :tax %>
+      </td>
+      <td>
+        <%= i.label :"合計" %>
+        <%= i.number_field :total %>
+      </td>
+      <td>
+        <%= i.label :"納入日" %>
+        <%= i.date_field :due_on %>
+      </td>
+      <td>
+        <%= i.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %>
+      </td>
+    <% end %>
+  </table>
+  <%= f.add_nested_fields_link :contractors, '追加', class: 'btn btn-primary', role: 'button' %>
+  <%= f.submit %>
+  <% end %>
+<%= link_to "一覧画面", purchase_order_confirmations_path %>
+
+<footer>
+  <div id="footer" class="fixed-bottom" style="height:50px; background-color: #343a40; color: #fff;">
+    <p class="text-center">© 2021 Hill inc.</p>
+  </div>
+</footer>

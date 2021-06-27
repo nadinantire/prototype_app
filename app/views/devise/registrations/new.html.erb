@@ -10,8 +10,11 @@
 
   <div class="form-group">
     <%= f.label :password %>
-    <%= f.password_field :password, autocomplete: 'current-password', class: 'form-control', required: true, minlength: @minimum_password_length, maxlength: 30 %>
-
+    <%= f.password_field :password, autocomplete: 'current-password',
+                                          class: 'form-control',
+                                          required: true,
+                                          minlength: @minimum_password_length,
+                                          maxlength: '30' %>
     <% if @minimum_password_length %>
       <small class="form-text text-muted"><%= t('devise.shared.minimum_password_length', count: @minimum_password_length) %></small>
     <% end %>
@@ -26,5 +29,3 @@
     <%= f.submit t('.sign_up'), class: 'btn btn-primary' %>
   </div>
 <% end %>
-
-<%= render 'devise/shared/links' %>

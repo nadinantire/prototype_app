@@ -1,0 +1,23 @@
+// Place all the styles related to the overviews controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.row2 {
+  text-align: right;
+}
+
+.search {
+  text-align: right;
+}
+
+.success {
+  text-align: center;
+}
+
+.table_block {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  margin: 0 auto;
+  display: flex;
+  width: 90%;
+}

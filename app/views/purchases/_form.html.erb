@@ -1,0 +1,84 @@
+<%= form_with(model: @purchase, local: true ) do |f| %>
+  <% if @purchase.errors.any? %>
+    <div id ="error_explanation">
+      <h2><%= @purchase.errors.count %>件のエラーあります。</h2>
+      <ul>
+        <% @purchase.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <table>
+  <tr>
+    <td>
+      <%= f.label :"日付" %>
+      <%= f.date_field :acceptance_on %>
+    </td>
+    <td>
+      <%= f.label :"会社名" %>
+      <%= f.text_field :firm %>
+    </td>
+    <td>
+      <%= f.label :"所属部署" %>
+      <%= f.text_field :department %>
+    </td>
+    <td>
+      <%= f.label :"役職" %>
+      <%= f.text_field :position %>
+    </td>
+    <td>
+      <%= f.label :"発注者" %>
+      <%= f.text_field :name %>
+    </td>
+    <td>
+      <%= f.label :"納期" %>
+      <%= f.text_field :delivery, placeholder: "納入希望日 / 日数" %>
+    </td>
+    <td>
+      <%= f.label :"タイトル" %>
+      <%= f.text_field :title %>
+    </td>
+  </tr>
+</table>
+  <%= f.nested_fields_for :orders, wrapper_tag: :tr do |i| %>
+    <td>
+      <%= i.label :"部品名" %>
+      <%= i.text_field :parts %>
+    </td>
+    <td>
+      <%= i.label :"機器名" %>
+      <%= i.text_field :equipment %>
+    </td>
+    <td>
+      <%= i.label :"型番" %>
+      <%= i.text_field :numeral %>
+    </td>
+    <td>
+      <%= i.label :"型式" %>
+      <%= i.text_field :identification %>
+    </td>
+    <td>
+      <%= i.label :"数量" %>
+      <%= i.number_field :quantity %>
+    </td>
+    <td>
+      <%= i.label :"備考" %>
+      <%= i.text_field :remarks %>
+    </td>
+    <td>
+      <%= i.remove_nested_fields_link '削除', class: 'btn btn-danger', role: 'button' %>
+    </td>
+  <% end %>
+  
+  <%= f.add_nested_fields_link :orders, '追加', class: 'btn btn-primary', role: 'button' %>
+  <%= f.submit %>
+<% end %>
+
+<%= link_to "一覧画面", purchases_path(purchase.id) %>
+
+<footer>
+  <div id="footer" class="fixed-bottom" style="height:50px; background-color: #343a40; color: #fff;">
+    <p class="text-center">© 2021 Hill inc.</p>
+  </div>
+</footer>

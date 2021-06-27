@@ -1,0 +1,90 @@
+<%= flash[:notice] %>
+<h1 id="typography">備品受注表</h1>
+<%= link_to '受注一覧', purchase_order_confirmations_path %>
+<%= link_to '発注一覧', purchases_path %>
+<% if current_user.admin == '管理者' %>
+  <%= link_to '管理画面', admin_user_path %>
+<% end %>
+
+<div class="wrapper">
+  <div class="order_confirmation_formats">
+    <div></div><%= @order_confirmation.purchase.acceptance_on %></div>
+    <div>納期  <%= @order_confirmation.purchase.delivery %></div>
+    <table class="row">
+      <p>発注会社</p>
+      <div><%= @order_confirmation.purchase.firm %></div>
+      <div><%= @order_confirmation.purchase.department %></div>
+      <div><%= @order_confirmation.purchase.position %></div>
+      <div><%= @order_confirmation.purchase.name %></div>
+    </table>
+
+    <div class="row2">
+      <table class="row">
+        <p>受注会社</p>
+        <div><%= @order_confirmation.firm %></div>
+        <div><%= @order_confirmation.department %></div>
+        <div><%= @order_confirmation.position %></div>
+        <div><%= @order_confirmation.name %></div>
+      </table>
+    </div>
+  <section>
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="bs-component">
+          <div class="table_block">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>部品名</th>
+                  <th>機器名</th>
+                  <th>型番</th>
+                  <th>型式</th>
+                  <th>数量</th>
+                  <th>備考</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @order_confirmation.purchase.orders.each do |order| %>
+                  <tr>
+                    <td><%= order.parts %></td>
+                    <td><%= order.equipment %></td>
+                    <td><%= order.numeral %></td>
+                    <td><%= order.identification %></td>
+                    <td><%= order.quantity %></td>
+                    <td><%= order.remarks %></td>
+                  </tr>
+                <% end %>
+              </tbody>
+            </table>
+
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>価格</th>
+                  <th>税</th>
+                  <th>合計</th>
+                  <th>納入日</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% @contractors.each do |contractor| %>
+                <tr>
+                  <td><%= contractor.price %></td>
+                  <td><%= contractor.tax %></td>
+                  <td><%= contractor.total %></td>
+                  <td><%= contractor.due_on %></td>
+                </tr>
+                <% end %>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+  <% if current_user.admin == '管理者' %>
+    <%= link_to '編集', edit_purchase_order_confirmation_path(@order_confirmation) %>
+    <%= link_to '削除', purchase_order_confirmation_path(@order_confirmation), method: :delete, data: { confirm: '削除しますか?' } %>
+  <% end %>
+</div>
